@@ -34,18 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
           width: Get.width,
           height: Get.height,
           decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                  "assets/images/background.jpg",
-                ),
-                fit: BoxFit.cover),
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [
-                const Color(0xFFF7F8FB),
-                const Color(0xFFF7F8FB).withOpacity(0.20),
-              ],
+              colors: [const Color(0xFF17181A), const Color(0xFF17181A)],
             ),
           ),
           child: SafeArea(
@@ -69,18 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             alignment: Alignment.bottomRight,
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
-                              child: Text(
+                              child: ColorfulText(
                                 calculationsController.calculations
                                     .map((e) => e.toString())
                                     .join(''),
-                                textAlign: TextAlign.end,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(
-                                      fontSize: 24,
-                                      color: const Color(0xFF818181),
-                                    ),
                               ),
                             ),
                           ),
@@ -92,9 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           flex: 1,
                           child: Text(
                             calculationsController.result != null
-                                ? roundToDecimalPlaces(
-                                        calculationsController.result!, 9)
-                                    .toString()
+                                ? ("=${roundToDecimalPlaces(calculationsController.result!, 9)}")
                                 : "",
                             textAlign: TextAlign.end,
                             style: Theme.of(context)
@@ -102,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 .bodyMedium
                                 ?.copyWith(
                                   fontSize: 48,
-                                  color: const Color(0xFF424242),
+                                  color: const Color(0xFFFFFFFF),
                                 ),
                           ),
                         ),
@@ -127,6 +109,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: 62,
                                 height: 40,
                                 radius: 16,
+                                isLinearGradient: false,
+                                backgroundColor: const Color(0xFF303136),
                                 child: Stack(
                                   alignment: Alignment.center,
                                   children: [
@@ -135,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       height: 10.17,
                                       child: SvgPicture.asset(
                                         Images.e,
-                                        color: Colors.white,
+                                        color: const Color(0xFF29A8FF),
                                       ),
                                     ),
                                   ],
@@ -145,6 +129,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: 62,
                                 height: 40,
                                 radius: 16,
+                                isLinearGradient: false,
+                                backgroundColor: const Color(0xFF303136),
                                 child: Stack(
                                   alignment: Alignment.center,
                                   children: [
@@ -153,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       height: 14.63,
                                       child: SvgPicture.asset(
                                         Images.mu,
-                                        color: Colors.white,
+                                        color: const Color(0xFF29A8FF),
                                       ),
                                     ),
                                   ],
@@ -163,6 +149,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: 62,
                                 height: 40,
                                 radius: 16,
+                                isLinearGradient: false,
+                                backgroundColor: const Color(0xFF303136),
                                 child: Stack(
                                   alignment: Alignment.center,
                                   children: [
@@ -171,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       height: 14.13,
                                       child: SvgPicture.asset(
                                         Images.sin,
-                                        color: Colors.white,
+                                        color: const Color(0xFF29A8FF),
                                       ),
                                     ),
                                   ],
@@ -181,6 +169,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: 62,
                                 height: 40,
                                 radius: 16,
+                                isLinearGradient: false,
+                                backgroundColor: const Color(0xFF303136),
                                 child: Stack(
                                   alignment: Alignment.center,
                                   children: [
@@ -189,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       height: 18.18,
                                       child: SvgPicture.asset(
                                         Images.deg,
-                                        color: Colors.white,
+                                        color: const Color(0xFF29A8FF),
                                       ),
                                     ),
                                   ],
@@ -212,14 +202,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: 62,
                                   height: 62,
                                   radius: 16,
+                                  isLinearGradient: false,
+                                  backgroundColor: const Color(0xFF616161),
                                   child: Stack(
                                     alignment: Alignment.center,
                                     children: [
                                       SizedBox(
                                         width: 42,
                                         height: 48,
-                                        child: SvgPicture.asset(Images.ac,
-                                            color: const Color(0xFF000000)),
+                                        child: SvgPicture.asset(
+                                          Images.ac,
+                                          color: const Color(0xFFA5A5A5),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -234,6 +228,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: 62,
                                   height: 62,
                                   radius: 16,
+                                  isLinearGradient: false,
+                                  backgroundColor: const Color(0xFF616161),
                                   child: Stack(
                                     alignment: Alignment.center,
                                     children: [
@@ -242,7 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         height: 18,
                                         child: SvgPicture.asset(
                                           Images.vector,
-                                          color: const Color(0xFF000000),
+                                          color: const Color(0xFFA5A5A5),
                                         ),
                                       ),
                                     ],
@@ -259,15 +255,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: 62,
                                   height: 62,
                                   radius: 16,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: const Color(0xFFFFFFFF)
-                                          .withOpacity(0.25),
-                                      spreadRadius: 0,
-                                      blurRadius: 9,
-                                      offset: const Offset(0, 0),
-                                    ),
-                                  ],
+                                  isLinearGradient: false,
+                                  backgroundColor: const Color(0xFF005DB2),
                                   child: Stack(
                                     alignment: Alignment.center,
                                     children: [
@@ -276,8 +265,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         height: 27,
                                         child: SvgPicture.asset(
                                           Images.divide,
-                                          color: const Color(0xFF000000)
-                                              .withOpacity(0.7),
+                                          color: const Color(0xFF339DFF),
                                         ),
                                       ),
                                     ],
@@ -293,15 +281,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: 62,
                                   height: 62,
                                   radius: 16,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: const Color(0xFFFFFFFF)
-                                          .withOpacity(0.25),
-                                      spreadRadius: 0,
-                                      blurRadius: 9,
-                                      offset: const Offset(0, 0),
-                                    ),
-                                  ],
+                                  isLinearGradient: false,
+                                  backgroundColor: const Color(0xFF005DB2),
                                   child: Stack(
                                     alignment: Alignment.center,
                                     children: [
@@ -310,8 +291,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         height: 12,
                                         child: SvgPicture.asset(
                                           Images.multiply,
-                                          color: const Color(0xFF000000)
-                                              .withOpacity(0.7),
+                                          color: const Color(0xFF339DFF),
                                         ),
                                       ),
                                     ],
@@ -335,6 +315,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: 62,
                                   height: 62,
                                   radius: 16,
+                                  isLinearGradient: false,
+                                  backgroundColor: const Color(0xFF303136),
                                   child: Stack(
                                     alignment: Alignment.center,
                                     children: [
@@ -359,6 +341,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: 62,
                                   height: 62,
                                   radius: 16,
+                                  isLinearGradient: false,
+                                  backgroundColor: const Color(0xFF303136),
                                   child: Stack(
                                     alignment: Alignment.center,
                                     children: [
@@ -383,6 +367,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: 62,
                                   height: 62,
                                   radius: 16,
+                                  isLinearGradient: false,
+                                  backgroundColor: const Color(0xFF303136),
                                   child: Stack(
                                     alignment: Alignment.center,
                                     children: [
@@ -412,15 +398,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     width: 62,
                                     height: 62,
                                     radius: 16,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: const Color(0xFFFFFFFF)
-                                            .withOpacity(0.25),
-                                        spreadRadius: 0,
-                                        blurRadius: 9,
-                                        offset: const Offset(0, 0),
-                                      ),
-                                    ],
+                                    isLinearGradient: false,
+                                    backgroundColor: const Color(0xFF005DB2),
                                     child: Stack(
                                       alignment: Alignment.center,
                                       children: [
@@ -429,8 +408,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           height: 48,
                                           child: SvgPicture.asset(
                                             Images.subtract,
-                                            color: const Color(0xFF000000)
-                                                .withOpacity(0.7),
+                                            color: const Color(0xFF339DFF),
                                           ),
                                         ),
                                       ],
@@ -463,6 +441,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             width: 62,
                                             height: 62,
                                             radius: 16,
+                                            isLinearGradient: false,
+                                            backgroundColor:
+                                                const Color(0xFF303136),
                                             child: Stack(
                                               alignment: Alignment.center,
                                               children: [
@@ -487,6 +468,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             width: 62,
                                             height: 62,
                                             radius: 16,
+                                            isLinearGradient: false,
+                                            backgroundColor:
+                                                const Color(0xFF303136),
                                             child: Stack(
                                               alignment: Alignment.center,
                                               children: [
@@ -511,6 +495,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             width: 62,
                                             height: 62,
                                             radius: 16,
+                                            isLinearGradient: false,
+                                            backgroundColor:
+                                                const Color(0xFF303136),
                                             child: Stack(
                                               alignment: Alignment.center,
                                               children: [
@@ -544,6 +531,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             width: 62,
                                             height: 62,
                                             radius: 16,
+                                            isLinearGradient: false,
+                                            backgroundColor:
+                                                const Color(0xFF303136),
                                             child: Stack(
                                               alignment: Alignment.center,
                                               children: [
@@ -568,6 +558,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             width: 62,
                                             height: 62,
                                             radius: 16,
+                                            isLinearGradient: false,
+                                            backgroundColor:
+                                                const Color(0xFF303136),
                                             child: Stack(
                                               alignment: Alignment.center,
                                               children: [
@@ -592,6 +585,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             width: 62,
                                             height: 62,
                                             radius: 16,
+                                            isLinearGradient: false,
+                                            backgroundColor:
+                                                const Color(0xFF303136),
                                             child: Stack(
                                               alignment: Alignment.center,
                                               children: [
@@ -620,6 +616,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           width: 144,
                                           height: 62,
                                           radius: 16,
+                                          isLinearGradient: false,
+                                          backgroundColor:
+                                              const Color(0xFF303136),
                                           child: Stack(
                                             alignment: Alignment.center,
                                             children: [
@@ -638,6 +637,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           width: 62,
                                           height: 62,
                                           radius: 16,
+                                          isLinearGradient: false,
+                                          backgroundColor:
+                                              const Color(0xFF303136),
                                           child: Stack(
                                             alignment: Alignment.center,
                                             children: [
@@ -671,15 +673,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       width: 62,
                                       height: 96,
                                       radius: 16,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: const Color(0xFFFFFFFF)
-                                              .withOpacity(0.25),
-                                          spreadRadius: 0,
-                                          blurRadius: 9,
-                                          offset: const Offset(0, 0),
-                                        ),
-                                      ],
+                                      isLinearGradient: false,
+                                      backgroundColor: const Color(0xFF005DB2),
                                       child: Stack(
                                         alignment: Alignment.center,
                                         children: [
@@ -688,8 +683,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             height: 48,
                                             child: SvgPicture.asset(
                                               Images.add,
-                                              color: const Color(0xFF000000)
-                                                  .withOpacity(0.7),
+                                              color: const Color(0xFF339DFF),
                                             ),
                                           ),
                                         ],
@@ -708,24 +702,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       width: 62,
                                       height: 96,
                                       radius: 16,
-                                      backgroundColor: const Color(0xFF19ACFF),
+                                      backgroundColor: const Color(0xFF1991FF),
                                       isLinearGradient: false,
                                       isBorder: false,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: const Color(0xFF000000)
-                                              .withOpacity(0.25),
-                                          spreadRadius: 0,
-                                          blurRadius: 4,
-                                          offset: const Offset(0, 4),
-                                        ),
-                                        const BoxShadow(
-                                          color: Color(0xFFB0DFFF),
-                                          spreadRadius: 0,
-                                          blurRadius: 11,
-                                          offset: Offset(-3, 4),
-                                        ),
-                                      ],
                                       child: Stack(
                                         alignment: Alignment.center,
                                         children: [
@@ -734,7 +713,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             height: 48,
                                             child: SvgPicture.asset(
                                               Images.equal,
-                                              color: Colors.white,
+                                              color: const Color(0xFFB2DAFF),
                                             ),
                                           ),
                                         ],
@@ -790,9 +769,6 @@ class _BluryButtonWidgetState extends State<BluryButtonWidget>
       width: widget.width ?? 62,
       height: widget.height ?? 34,
       decoration: BoxDecoration(
-          border: widget.isBorder
-              ? Border.all(width: 1, color: const Color(0xFFFFFFFF))
-              : null,
           borderRadius: BorderRadius.circular(widget.radius ?? 16),
           color: widget.backgroundColor,
           gradient: widget.isLinearGradient
@@ -819,5 +795,35 @@ class _BluryButtonWidgetState extends State<BluryButtonWidget>
             )
           : widget.child,
     );
+  }
+}
+
+class ColorfulText extends StatelessWidget {
+  final String text;
+
+  ColorfulText(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      textAlign: TextAlign.end,
+      text: TextSpan(
+        children: text.split('').map((char) {
+          return TextSpan(
+            text: char,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontSize: 24,
+                  color: _isNumber(char)
+                      ? const Color(0xFF818181)
+                      : const Color(0xFF109DFF),
+                ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  bool _isNumber(String char) {
+    return double.tryParse(char) != null;
   }
 }
