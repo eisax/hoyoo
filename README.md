@@ -10,16 +10,6 @@ Hoyoo is a simple and intuitive calculator app built using Flutter. Inspired by 
 * Responsive UI: Adapts seamlessly to different screen sizes and orientations.
 * GetX State Management: Ensures a smooth and efficient state management solution for the app.
 
-## ScreenShots 
-![flutter_02](https://github.com/eisax/hoyoo/assets/122221192/8a3f43c5-910e-48d3-80dc-93373858b31e)
-
-![flutter_03](https://github.com/eisax/hoyoo/assets/122221192/09241556-f654-4480-a387-26febe1ddcab)
-
-![flutter_04](https://github.com/eisax/hoyoo/assets/122221192/b27a6f4f-a345-422d-9557-6a290f9caef6)
-
-
-
-
 ## Installation
 
 1. Clone the repository:
