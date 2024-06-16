@@ -1,4 +1,4 @@
-# fourfiles
+# Hoyoo Calculator
 
 A new Flutter project.
 
