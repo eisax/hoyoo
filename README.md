@@ -16,7 +16,7 @@ Hoyoo is a simple and intuitive calculator app built using Flutter. Inspired by 
 
 ```
 git clone https://github.com/eisax/hoyoo.git
-cd hoyoo_calculator
+cd hoyoo
  ```
 
  2. Install dependencies:
