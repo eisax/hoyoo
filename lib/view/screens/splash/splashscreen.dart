@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hoyoo/controller/auth_controller.dart';
 import 'package:hoyoo/helper/route_helper.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  const SplashScreen({Key? key, }) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -15,15 +14,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void _route() async {
     Timer(const Duration(microseconds: 10), () async {
        Get.offAllNamed(RouteHelper.auth);
-      AuthStatus authStatus = await Get.find<AuthController>().authCheck();
-
-      if (authStatus == AuthStatus.signedIn) {
         Get.offAllNamed(RouteHelper.home);
-      }
-
-      if (authStatus == AuthStatus.signedOut) {
-        Get.offAllNamed(RouteHelper.home);
-      }
+    
     });
   }
 

@@ -24,7 +24,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  MyApp({Key? key, }) : super(key: key);
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   @override

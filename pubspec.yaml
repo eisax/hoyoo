@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.2.6 <4.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 dependencies:
   flutter:
     sdk: flutter
@@ -15,18 +15,8 @@ dependencies:
   font_awesome_flutter: ^10.5.0
   flutter_svg: ^2.0.10+1
   device_preview: ^1.1.0
-  image_picker: ^1.0.7
-  # geocoding: ^2.2.0
-  # geolocator: ^11.0.0
-  geolocator: ^8.0.0
-  geocoding: ^2.0.0
-  shimmer: ^3.0.0
-  connectivity_plus: ^2.3.8
-  dio: ^5.4.1
-  http: ^1.2.0
   floor: ^1.4.0
-  flutter_svg_provider: ^1.0.7
-  file_picker: ^8.0.0+1
+
 
 dev_dependencies:
   flutter_test:

@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 import 'package:hoyoo/data/FourFilesDB.dart';
-import 'package:hoyoo/data/api/api_client.dart';
 import 'package:hoyoo/data/model/response/survey.dart';
-import 'package:hoyoo/util/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SurveyRepo extends GetxService {
@@ -10,9 +8,7 @@ class SurveyRepo extends GetxService {
   final AppDatabase db;
   SurveyRepo({required this.db, required this.sharedPreferences});
 
-  Future<Response?> getSurveyList({required ApiClient apiClient}) async {
-    return await apiClient.getData(AppConstants.getAllSurveysUrl);
-  }
+
 
   Future<List<SurveyModel>> getSurveyListOffline() async {
     return await db.surveyModelDao.findAll();
