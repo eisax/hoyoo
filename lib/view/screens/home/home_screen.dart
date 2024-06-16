@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -19,6 +20,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  double roundToDecimalPlaces(double value, int places) {
+    double mod = pow(10.0, places).toDouble();
+    return ((value * mod).round().toDouble() / mod);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CalculatorControler>(builder: (calculationsController) {
@@ -28,6 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
           width: Get.width,
           height: Get.height,
           decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                  "assets/images/background.jpg",
+                ),
+                fit: BoxFit.cover),
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -38,526 +49,215 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           child: SafeArea(
-            child: Column(
-              children: [
-                Container(
-                  width: Get.width,
-                  height: Get.height * 0.3,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: Dimensions.paddingSizeDefault,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Align(
-                          alignment: Alignment.bottomRight,
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
+              child: Column(
+                children: [
+                  Container(
+                    width: Get.width,
+                    height: Get.height * 0.3,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Dimensions.paddingSizeDefault,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Text(
+                                calculationsController.calculations
+                                    .map((e) => e.toString())
+                                    .join(''),
+                                textAlign: TextAlign.end,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                      fontSize: 24,
+                                      color: const Color(0xFF818181),
+                                    ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: Dimensions.paddingSizeDefault,
+                        ),
+                        Expanded(
+                          flex: 1,
                           child: Text(
-                            calculationsController.calculations.toString(),
+                            calculationsController.result != null
+                                ? roundToDecimalPlaces(
+                                        calculationsController.result!, 9)
+                                    .toString()
+                                : "",
                             textAlign: TextAlign.end,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium
                                 ?.copyWith(
-                                  fontSize: 24,
-                                  color: const Color(0xFF818181),
+                                  fontSize: 48,
+                                  color: const Color(0xFF424242),
                                 ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: Dimensions.paddingSizeDefault,
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Text(
-                          "-12,454",
-                          textAlign: TextAlign.end,
-                          style:
-                              Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    fontSize: 48,
-                                    color: const Color(0xFF424242),
-                                  ),
+                        SizedBox(
+                          height: Dimensions.paddingSizeExtraLarge,
                         ),
-                      ),
-                      SizedBox(
-                        height: Dimensions.paddingSizeExtraLarge,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Dimensions.paddingSizeLarge),
-                    width: Get.width,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            BluryButtonWidget(
-                              width: 62,
-                              height: 40,
-                              radius: 16,
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 9.72,
-                                    height: 10.17,
-                                    child: SvgPicture.asset(
-                                      Images.e,
-                                      color: Colors.white,
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Dimensions.paddingSizeLarge),
+                      width: Get.width,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              BluryButtonWidget(
+                                width: 62,
+                                height: 40,
+                                radius: 16,
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: 9.72,
+                                      height: 10.17,
+                                      child: SvgPicture.asset(
+                                        Images.e,
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            BluryButtonWidget(
-                              width: 62,
-                              height: 40,
-                              radius: 16,
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 9.38,
-                                    height: 14.63,
-                                    child: SvgPicture.asset(
-                                      Images.mu,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            BluryButtonWidget(
-                              width: 62,
-                              height: 40,
-                              radius: 16,
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 23.82,
-                                    height: 14.13,
-                                    child: SvgPicture.asset(
-                                      Images.sin,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            BluryButtonWidget(
-                              width: 62,
-                              height: 40,
-                              radius: 16,
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 33.53,
-                                    height: 18.18,
-                                    child: SvgPicture.asset(
-                                      Images.deg,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: Dimensions.paddingSizeDefault,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            BluryButtonWidget(
-                              width: 62,
-                              height: 62,
-                              radius: 16,
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 42,
-                                    height: 48,
-                                    child: SvgPicture.asset(Images.ac,
-                                        color: const Color(0xFF000000)),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            BluryButtonWidget(
-                              width: 62,
-                              height: 62,
-                              radius: 16,
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 21.8,
-                                    height: 18,
-                                    child: SvgPicture.asset(
-                                      Images.vector,
-                                      color: const Color(0xFF000000),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            BluryButtonWidget(
-                              width: 62,
-                              height: 62,
-                              radius: 16,
-                              boxShadow: [
-                                BoxShadow(
-                                  color:
-                                      const Color(0xFFFFFFFF).withOpacity(0.25),
-                                  spreadRadius: 0,
-                                  blurRadius: 9,
-                                  offset: const Offset(0, 0),
+                                  ],
                                 ),
-                              ],
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 12,
-                                    height: 27,
-                                    child: SvgPicture.asset(
-                                      Images.divide,
-                                      color: const Color(0xFF000000)
-                                          .withOpacity(0.7),
-                                    ),
-                                  ),
-                                ],
                               ),
-                            ),
-                            BluryButtonWidget(
-                              width: 62,
-                              height: 62,
-                              radius: 16,
-                              boxShadow: [
-                                BoxShadow(
-                                  color:
-                                      const Color(0xFFFFFFFF).withOpacity(0.25),
-                                  spreadRadius: 0,
-                                  blurRadius: 9,
-                                  offset: const Offset(0, 0),
+                              BluryButtonWidget(
+                                width: 62,
+                                height: 40,
+                                radius: 16,
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: 9.38,
+                                      height: 14.63,
+                                      child: SvgPicture.asset(
+                                        Images.mu,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 12,
-                                    height: 12,
-                                    child: SvgPicture.asset(
-                                      Images.multiply,
-                                      color: const Color(0xFF000000)
-                                          .withOpacity(0.7),
-                                    ),
-                                  ),
-                                ],
                               ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: Dimensions.paddingSizeDefault,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            BluryButtonWidget(
-                              width: 62,
-                              height: 62,
-                              radius: 16,
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 17,
-                                    height: 48,
-                                    child: SvgPicture.asset(
-                                      Images.seven,
-                                      color: Colors.white,
+                              BluryButtonWidget(
+                                width: 62,
+                                height: 40,
+                                radius: 16,
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: 23.82,
+                                      height: 14.13,
+                                      child: SvgPicture.asset(
+                                        Images.sin,
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            BluryButtonWidget(
-                              width: 62,
-                              height: 62,
-                              radius: 16,
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 21,
-                                    height: 48,
-                                    child: SvgPicture.asset(
-                                      Images.eight,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            BluryButtonWidget(
-                              width: 62,
-                              height: 62,
-                              radius: 16,
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 21,
-                                    height: 48,
-                                    child: SvgPicture.asset(
-                                      Images.nine,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            BluryButtonWidget(
-                              width: 62,
-                              height: 62,
-                              radius: 16,
-                              boxShadow: [
-                                BoxShadow(
-                                  color:
-                                      const Color(0xFFFFFFFF).withOpacity(0.25),
-                                  spreadRadius: 0,
-                                  blurRadius: 9,
-                                  offset: const Offset(0, 0),
+                                  ],
                                 ),
-                              ],
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 19,
-                                    height: 48,
-                                    child: SvgPicture.asset(
-                                      Images.subtract,
-                                      color: const Color(0xFF000000)
-                                          .withOpacity(0.7),
+                              ),
+                              BluryButtonWidget(
+                                width: 62,
+                                height: 40,
+                                radius: 16,
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: 33.53,
+                                      height: 18.18,
+                                      child: SvgPicture.asset(
+                                        Images.deg,
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: Dimensions.paddingSizeDefault,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      BluryButtonWidget(
-                                        width: 62,
-                                        height: 62,
-                                        radius: 16,
-                                        child: Stack(
-                                          alignment: Alignment.center,
-                                          children: [
-                                            SizedBox(
-                                              width: 21,
-                                              height: 48,
-                                              child: SvgPicture.asset(
-                                                Images.four,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      BluryButtonWidget(
-                                        width: 62,
-                                        height: 62,
-                                        radius: 16,
-                                        child: Stack(
-                                          alignment: Alignment.center,
-                                          children: [
-                                            SizedBox(
-                                              width: 21,
-                                              height: 48,
-                                              child: SvgPicture.asset(
-                                                Images.five,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      BluryButtonWidget(
-                                        width: 62,
-                                        height: 62,
-                                        radius: 16,
-                                        child: Stack(
-                                          alignment: Alignment.center,
-                                          children: [
-                                            SizedBox(
-                                              width: 21,
-                                              height: 48,
-                                              child: SvgPicture.asset(
-                                                Images.six,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: Dimensions.paddingSizeDefault,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          print('done--1');
-                                          calculationsController
-                                              .addCalculationValues(value: 1);
-                                              print('done--');
-                                        },
-                                        child: BluryButtonWidget(
-                                          width: 62,
-                                          height: 62,
-                                          radius: 16,
-                                          child: Stack(
-                                            alignment: Alignment.center,
-                                            children: [
-                                              SizedBox(
-                                                width: 12,
-                                                height: 48,
-                                                child: SvgPicture.asset(
-                                                  Images.one,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      BluryButtonWidget(
-                                        width: 62,
-                                        height: 62,
-                                        radius: 16,
-                                        child: Stack(
-                                          alignment: Alignment.center,
-                                          children: [
-                                            SizedBox(
-                                              width: 19,
-                                              height: 48,
-                                              child: SvgPicture.asset(
-                                                Images.two,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      BluryButtonWidget(
-                                        width: 62,
-                                        height: 62,
-                                        radius: 16,
-                                        child: Stack(
-                                          alignment: Alignment.center,
-                                          children: [
-                                            SizedBox(
-                                              width: 19,
-                                              height: 48,
-                                              child: SvgPicture.asset(
-                                                Images.three,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: Dimensions.paddingSizeDefault,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      BluryButtonWidget(
-                                        width: 144,
-                                        height: 62,
-                                        radius: 16,
-                                        child: Stack(
-                                          alignment: Alignment.center,
-                                          children: [
-                                            SizedBox(
-                                              width: 21,
-                                              height: 48,
-                                              child: SvgPicture.asset(
-                                                Images.zero,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      BluryButtonWidget(
-                                        width: 62,
-                                        height: 62,
-                                        radius: 16,
-                                        child: Stack(
-                                          alignment: Alignment.center,
-                                          children: [
-                                            SizedBox(
-                                              width: 4.5,
-                                              height: 4.5,
-                                              child: SvgPicture.asset(
-                                                Images.rectangle,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              width: Dimensions.paddingSizeLarge,
-                            ),
-                            Column(
-                              children: [
-                                BluryButtonWidget(
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: Dimensions.paddingSizeDefault,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  calculationsController
+                                      .clearCalculationValues();
+                                },
+                                child: BluryButtonWidget(
                                   width: 62,
-                                  height: 96,
+                                  height: 62,
+                                  radius: 16,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: 42,
+                                        height: 48,
+                                        child: SvgPicture.asset(Images.ac,
+                                            color: const Color(0xFF000000)),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  calculationsController
+                                      .deleteCalculationValues();
+                                },
+                                child: BluryButtonWidget(
+                                  width: 62,
+                                  height: 62,
+                                  radius: 16,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: 21.8,
+                                        height: 18,
+                                        child: SvgPicture.asset(
+                                          Images.vector,
+                                          color: const Color(0xFF000000),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  print("object");
+                                  calculationsController.addCalculationValues(
+                                      value: "/");
+                                },
+                                child: BluryButtonWidget(
+                                  width: 62,
+                                  height: 62,
                                   radius: 16,
                                   boxShadow: [
                                     BoxShadow(
@@ -572,10 +272,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     alignment: Alignment.center,
                                     children: [
                                       SizedBox(
-                                        width: 23,
-                                        height: 48,
+                                        width: 12,
+                                        height: 27,
                                         child: SvgPicture.asset(
-                                          Images.add,
+                                          Images.divide,
                                           color: const Color(0xFF000000)
                                               .withOpacity(0.7),
                                         ),
@@ -583,54 +283,474 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
-                                  height: Dimensions.paddingSizeDefault,
-                                ),
-                                BluryButtonWidget(
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  calculationsController.addCalculationValues(
+                                      value: "*");
+                                },
+                                child: BluryButtonWidget(
                                   width: 62,
-                                  height: 96,
+                                  height: 62,
                                   radius: 16,
-                                  backgroundColor: const Color(0xFF19ACFF),
-                                  isLinearGradient: false,
-                                  isBorder: false,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: const Color(0xFF000000)
+                                      color: const Color(0xFFFFFFFF)
                                           .withOpacity(0.25),
                                       spreadRadius: 0,
-                                      blurRadius: 4,
-                                      offset: const Offset(0, 4),
-                                    ),
-                                    const BoxShadow(
-                                      color: Color(0xFFB0DFFF),
-                                      spreadRadius: 0,
-                                      blurRadius: 11,
-                                      offset: Offset(-3, 4),
+                                      blurRadius: 9,
+                                      offset: const Offset(0, 0),
                                     ),
                                   ],
                                   child: Stack(
                                     alignment: Alignment.center,
                                     children: [
                                       SizedBox(
-                                        width: 25,
+                                        width: 12,
+                                        height: 12,
+                                        child: SvgPicture.asset(
+                                          Images.multiply,
+                                          color: const Color(0xFF000000)
+                                              .withOpacity(0.7),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: Dimensions.paddingSizeDefault,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  calculationsController.addCalculationValues(
+                                      value: 7);
+                                },
+                                child: BluryButtonWidget(
+                                  width: 62,
+                                  height: 62,
+                                  radius: 16,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: 17,
                                         height: 48,
                                         child: SvgPicture.asset(
-                                          Images.equal,
+                                          Images.seven,
                                           color: Colors.white,
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  calculationsController.addCalculationValues(
+                                      value: 8);
+                                },
+                                child: BluryButtonWidget(
+                                  width: 62,
+                                  height: 62,
+                                  radius: 16,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: 21,
+                                        height: 48,
+                                        child: SvgPicture.asset(
+                                          Images.eight,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  calculationsController.addCalculationValues(
+                                      value: 9);
+                                },
+                                child: BluryButtonWidget(
+                                  width: 62,
+                                  height: 62,
+                                  radius: 16,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: 21,
+                                        height: 48,
+                                        child: SvgPicture.asset(
+                                          Images.nine,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  calculationsController.addCalculationValues(
+                                      value: "-");
+                                },
+                                child: GestureDetector(
+                                  onTap: () {
+                                    calculationsController.addCalculationValues(
+                                        value: "-");
+                                  },
+                                  child: BluryButtonWidget(
+                                    width: 62,
+                                    height: 62,
+                                    radius: 16,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: const Color(0xFFFFFFFF)
+                                            .withOpacity(0.25),
+                                        spreadRadius: 0,
+                                        blurRadius: 9,
+                                        offset: const Offset(0, 0),
+                                      ),
+                                    ],
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: 19,
+                                          height: 48,
+                                          child: SvgPicture.asset(
+                                            Images.subtract,
+                                            color: const Color(0xFF000000)
+                                                .withOpacity(0.7),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: Dimensions.paddingSizeDefault,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            calculationsController
+                                                .addCalculationValues(value: 4);
+                                          },
+                                          child: BluryButtonWidget(
+                                            width: 62,
+                                            height: 62,
+                                            radius: 16,
+                                            child: Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                SizedBox(
+                                                  width: 21,
+                                                  height: 48,
+                                                  child: SvgPicture.asset(
+                                                    Images.four,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            calculationsController
+                                                .addCalculationValues(value: 2);
+                                          },
+                                          child: BluryButtonWidget(
+                                            width: 62,
+                                            height: 62,
+                                            radius: 16,
+                                            child: Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                SizedBox(
+                                                  width: 21,
+                                                  height: 48,
+                                                  child: SvgPicture.asset(
+                                                    Images.five,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            calculationsController
+                                                .addCalculationValues(value: 6);
+                                          },
+                                          child: BluryButtonWidget(
+                                            width: 62,
+                                            height: 62,
+                                            radius: 16,
+                                            child: Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                SizedBox(
+                                                  width: 21,
+                                                  height: 48,
+                                                  child: SvgPicture.asset(
+                                                    Images.six,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: Dimensions.paddingSizeDefault,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            calculationsController
+                                                .addCalculationValues(value: 1);
+                                          },
+                                          child: BluryButtonWidget(
+                                            width: 62,
+                                            height: 62,
+                                            radius: 16,
+                                            child: Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                SizedBox(
+                                                  width: 12,
+                                                  height: 48,
+                                                  child: SvgPicture.asset(
+                                                    Images.one,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            calculationsController
+                                                .addCalculationValues(value: 2);
+                                          },
+                                          child: BluryButtonWidget(
+                                            width: 62,
+                                            height: 62,
+                                            radius: 16,
+                                            child: Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                SizedBox(
+                                                  width: 19,
+                                                  height: 48,
+                                                  child: SvgPicture.asset(
+                                                    Images.two,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            calculationsController
+                                                .addCalculationValues(value: 3);
+                                          },
+                                          child: BluryButtonWidget(
+                                            width: 62,
+                                            height: 62,
+                                            radius: 16,
+                                            child: Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                SizedBox(
+                                                  width: 19,
+                                                  height: 48,
+                                                  child: SvgPicture.asset(
+                                                    Images.three,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: Dimensions.paddingSizeDefault,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        BluryButtonWidget(
+                                          width: 144,
+                                          height: 62,
+                                          radius: 16,
+                                          child: Stack(
+                                            alignment: Alignment.center,
+                                            children: [
+                                              SizedBox(
+                                                width: 21,
+                                                height: 48,
+                                                child: SvgPicture.asset(
+                                                  Images.zero,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        BluryButtonWidget(
+                                          width: 62,
+                                          height: 62,
+                                          radius: 16,
+                                          child: Stack(
+                                            alignment: Alignment.center,
+                                            children: [
+                                              SizedBox(
+                                                width: 4.5,
+                                                height: 4.5,
+                                                child: SvgPicture.asset(
+                                                  Images.rectangle,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: Dimensions.paddingSizeLarge,
+                              ),
+                              Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      calculationsController
+                                          .addCalculationValues(value: "+");
+                                    },
+                                    child: BluryButtonWidget(
+                                      width: 62,
+                                      height: 96,
+                                      radius: 16,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: const Color(0xFFFFFFFF)
+                                              .withOpacity(0.25),
+                                          spreadRadius: 0,
+                                          blurRadius: 9,
+                                          offset: const Offset(0, 0),
+                                        ),
+                                      ],
+                                      child: Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          SizedBox(
+                                            width: 23,
+                                            height: 48,
+                                            child: SvgPicture.asset(
+                                              Images.add,
+                                              color: const Color(0xFF000000)
+                                                  .withOpacity(0.7),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: Dimensions.paddingSizeDefault,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      calculationsController
+                                          .evaluateExpression();
+                                    },
+                                    child: BluryButtonWidget(
+                                      width: 62,
+                                      height: 96,
+                                      radius: 16,
+                                      backgroundColor: const Color(0xFF19ACFF),
+                                      isLinearGradient: false,
+                                      isBorder: false,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: const Color(0xFF000000)
+                                              .withOpacity(0.25),
+                                          spreadRadius: 0,
+                                          blurRadius: 4,
+                                          offset: const Offset(0, 4),
+                                        ),
+                                        const BoxShadow(
+                                          color: Color(0xFFB0DFFF),
+                                          spreadRadius: 0,
+                                          blurRadius: 11,
+                                          offset: Offset(-3, 4),
+                                        ),
+                                      ],
+                                      child: Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          SizedBox(
+                                            width: 25,
+                                            height: 48,
+                                            child: SvgPicture.asset(
+                                              Images.equal,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -664,8 +784,6 @@ class BluryButtonWidget extends StatefulWidget {
 
 class _BluryButtonWidgetState extends State<BluryButtonWidget>
     with SingleTickerProviderStateMixin {
-  
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -701,6 +819,5 @@ class _BluryButtonWidgetState extends State<BluryButtonWidget>
             )
           : widget.child,
     );
-     
   }
 }

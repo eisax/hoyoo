@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
           AppConstants.languages[0].languageCode??'',
           AppConstants.languages[0].countryCode,
         ),
-        initialRoute: RouteHelper.splash,
+        initialRoute: RouteHelper.home,
         getPages: RouteHelper.routes,
         unknownRoute: GetPage(
           name: '/',
