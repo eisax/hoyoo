@@ -2,6 +2,13 @@
 
 Hoyoo is a simple and intuitive calculator app built using Flutter. Inspired by the renowned artist Holy 10, this calculator aims to combine sleek design with robust functionality. The app leverages the GetX package for efficient state management, ensuring a smooth and responsive user experience.
 
+## Algorithm used
+
+### Hoyoo Shunting Yard Algorithm
+
+The algorithm is a type of Infix Expression Evaluator that specifically uses a variation of the Shunting Yard Algorithm developed by Edsger Dijkstra. The Shunting Yard Algorithm is typically used to convert infix expressions to postfix (Reverse Polish Notation) before evaluation, but this implementation directly evaluates the infix expression while respecting operator precedence.
+
+
 ## Features
 
 * Basic Arithmetic Operations: Perform addition, subtraction, multiplication, and division.
