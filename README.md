@@ -32,7 +32,7 @@ cd hoyoo_calculator
 3. The result will be displayed in real-time as you type.
 4. Use the CE button to clear the current entry and the AC button to reset the calculator.
 
-## tate Management with GetX
+## State Management with GetX
 
 Hoyoo Calculator uses the GetX package for state management, which offers a reactive programming model and easy dependency injection. This ensures that the app remains responsive and that the state is efficiently managed.
 
