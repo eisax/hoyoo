@@ -710,7 +710,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         children: [
                                           SizedBox(
                                             width: 25,
-                                            height: 48,
+                                            height: 50,
                                             child: SvgPicture.asset(
                                               Images.equal,
                                               color: const Color(0xFFB2DAFF),
